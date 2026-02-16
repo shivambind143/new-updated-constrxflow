@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Dashboard - ConstruxFlow</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-brand">ConstruxFlow</div>
+        <div class="navbar-menu">
+            <span id="userName" style="color: white;"></span>
+            <a href="/profile" class="btn btn-primary">My Profile</a>
+            <button onclick="logout()" class="btn btn-danger">Logout</button>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h1>Supplier Dashboard</h1>
+            <div class="profile-section">
+                <div class="profile-image" id="profileImage">S</div>
+                <div id="profileName"></div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div style="margin-bottom: 2rem;">
+            <button class="btn btn-primary" onclick="showTab('inventory')">My Inventory</button>
+            <button class="btn btn-success" onclick="showTab('addMaterial')">Add Material</button>
+            <button class="btn btn-warning" onclick="showTab('orders')">Order Requests</button>
+        </div>
+
+        <!-- Inventory Tab -->
+        <div id="inventoryTab" class="tab-content">
+            <h2>My Inventory</h2>
+            <div id="inventoryList"></div>
+        </div>
+
+        <!-- Add Material Tab (UPDATED - Unit is now text input) -->
+        <div id="addMaterialTab" class="tab-content" style="display: none;">
+            <h2>Add Material to Inventory</h2>
+            <div class="card">
+                <div id="materialMessage"></div>
+                <form id="addMaterialForm">
+                    <div class="form-group">
+                        <label>Material Name</label>
+                        <input type="text" id="material_name" required placeholder="e.g., Cement, Steel, Bricks">
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number" id="quantity" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Unit (e.g., kg, bag, meter, cubic meter, ton, roll, piece)</label>
+                        <input type="text" id="unit" required placeholder="Enter unit like: kg, bag, meter, ton, etc.">
+                        <small style="color: #666; font-size: 0.85rem; display: block; margin-top: 0.3rem;">
+                            Examples: kg, bag, meter, cubic meter, ton, roll, piece, liter, square meter
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label>Price Per Unit</label>
+                        <input type="number" id="price_per_unit" step="0.01" min="0" required placeholder="Enter price">
+                    </div>
+                    <button type="submit" class="btn btn-success">Add to Inventory</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Orders Tab -->
+        <div id="ordersTab" class="tab-content" style="display: none;">
+            <h2>Order Requests</h2>
+            <div id="ordersList"></div>
+        </div>
+    </div>
+
+    <script src="/js/supplier-dashboard.js"></script>
+</body>
+</html>

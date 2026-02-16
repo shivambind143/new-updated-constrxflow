@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contractor Dashboard - ConstruxFlow</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-brand">ConstruxFlow</div>
+        <div class="navbar-menu">
+            <span id="userName" style="color: white;"></span>
+            <a href="/profile" class="btn btn-primary">My Profile</a>
+            <button onclick="logout()" class="btn btn-danger">Logout</button>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h1>Contractor Dashboard</h1>
+            <div class="profile-section">
+                <div class="profile-image" id="profileImage">C</div>
+                <div id="profileName"></div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div style="margin-bottom: 2rem;">
+            <button class="btn btn-primary" onclick="showTab('projects')">My Projects</button>
+            <button class="btn btn-success" onclick="showTab('addProject')">Add New Project</button>
+            <button class="btn btn-warning" onclick="showTab('applications')">Worker Applications</button>
+            <button class="btn" style="background: #9b59b6; color: white;" onclick="showTab('materials')">Materials</button>
+            <button class="btn" style="background: #e67e22; color: white;" onclick="showTab('orders')">My Orders</button>
+        </div>
+
+        <!-- Projects Tab -->
+        <div id="projectsTab" class="tab-content">
+            <h2>My Projects</h2>
+            <div id="projectsList"></div>
+        </div>
+
+        <!-- Add Project Tab (UPDATED) -->
+        <div id="addProjectTab" class="tab-content" style="display: none;">
+            <h2>Add New Project</h2>
+            <div class="card">
+                <div id="projectMessage"></div>
+                <form id="addProjectForm">
+                    <div class="form-group">
+                        <label>Project Name</label>
+                        <input type="text" id="project_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="location" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Start Date</label>
+                        <input type="date" id="start_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>End Date</label>
+                        <input type="date" id="end_date" required>
+                    </div>
+
+                    <!-- Dynamic Manpower Requirements Section -->
+                    <div class="form-group">
+                        <label style="font-size: 1.2rem; margin-bottom: 1rem; display: block;">Required Manpower</label>
+                        <div id="manpowerContainer">
+                            <div class="manpower-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 0.5rem; margin-bottom: 0.5rem; align-items: end;">
+                                <div>
+                                    <label style="font-size: 0.9rem;">Role Name</label>
+                                    <input type="text" class="role-name" placeholder="e.g., Mason, Electrician, Labour" required>
+                                </div>
+                                <div>
+                                    <label style="font-size: 0.9rem;">Required Count</label>
+                                    <input type="number" class="required-count" min="1" placeholder="Count" required>
+                                </div>
+                                <div>
+                                    <label style="font-size: 0.9rem;">Payment/Day (Optional)</label>
+                                    <input type="number" class="payment-per-day" step="0.01" placeholder="₹">
+                                </div>
+                                <div>
+                                    <button type="button" onclick="removeManpowerRow(this)" class="btn btn-danger" style="padding: 0.5rem 1rem; margin-top: 1.5rem;">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" onclick="addManpowerRow()" class="btn btn-success" style="margin-top: 0.5rem;">+ Add More Manpower</button>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" style="width: 100%; margin-top: 1rem;">Create Project</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Applications Tab -->
+        <div id="applicationsTab" class="tab-content" style="display: none;">
+            <h2>Worker Applications</h2>
+            <div id="applicationsList"></div>
+        </div>
+
+        <!-- Materials Tab -->
+        <div id="materialsTab" class="tab-content" style="display: none;">
+            <h2>Search Materials</h2>
+            <div class="card">
+                <div class="form-group">
+                    <label>Search Material</label>
+                    <input type="text" id="materialSearch" placeholder="Enter material name">
+                    <button onclick="searchMaterials()" class="btn btn-primary" style="margin-top: 0.5rem;">Search</button>
+                </div>
+            </div>
+            <div id="materialsList"></div>
+        </div>
+
+        <!-- Orders Tab -->
+        <div id="ordersTab" class="tab-content" style="display: none;">
+            <h2>My Material Orders</h2>
+            <div id="ordersList"></div>
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeOrderModal()">&times;</span>
+            <h3>Place Order</h3>
+            <div id="orderForm">
+                <div class="form-group">
+                    <label>Select Project</label>
+                    <select id="orderProject"></select>
+                </div>
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" id="orderQuantity" min="1" step="0.01">
+                </div>
+                <div id="orderDetails"></div>
+                <button onclick="confirmOrder()" class="btn btn-success">Place Order</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/contractor-dashboard.js"></script>
+</body>
+</html>

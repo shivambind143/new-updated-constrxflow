@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - ConstruxFlow</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .profile-page {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .profile-image-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+        }
+        .profile-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .section-divider {
+            margin: 2rem 0;
+            border-bottom: 2px solid #ddd;
+        }
+        .info-display {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+        .info-display label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.3rem;
+            color: #555;
+        }
+        .info-display p {
+            margin: 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-brand">ConstruxFlow</div>
+        <div class="navbar-menu">
+            <a href="#" onclick="goToDashboard()" style="color: white;">← Back to Dashboard</a>
+            <button onclick="logout()" class="btn btn-danger">Logout</button>
+        </div>
+    </nav>
+
+    <div class="profile-page">
+        <h1 style="text-align: center;">My Profile</h1>
+        
+        <div id="messageDiv"></div>
+
+        <!-- Profile Image Section -->
+        <div class="profile-header">
+            <div class="profile-image-container" id="profileImageContainer">
+                <span id="profileInitial">U</span>
+            </div>
+            <h2 id="profileName">Loading...</h2>
+            <p id="profileRole" style="color: #666;"></p>
+            
+            <div class="upload-btn-wrapper">
+                <button class="btn btn-primary">Upload New Photo</button>
+                <input type="file" id="profileImageInput" accept="image/png, image/jpeg, image/jpg" onchange="uploadProfileImage()">  
+
+            </div>
+            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">Only JPG and PNG allowed (Max 5MB)</p>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Basic Information Section -->
+        <div class="card">
+            <h3>Basic Information</h3>
+            <form id="basicInfoForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone">
+                </div>
+                
+                <div style="display: flex; gap: 1rem;">
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                    <button type="button" onclick="loadProfile()" class="btn" style="background: #95a5a6; color: white;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Password Change Section -->
+        <div class="card">
+            <h3>Change Password</h3>
+            <form id="passwordForm">
+                <div class="form-group">
+                    <label for="oldPassword">Current Password</label>
+                    <input type="password" id="oldPassword" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="newPassword">New Password (minimum 6 characters)</label>
+                    <input type="password" id="newPassword" required minlength="6">
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" required minlength="6">
+                </div>
+                
+                <button type="submit" class="btn btn-warning">Change Password</button>
+            </form>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Account Information (View Only) -->
+        <div class="card">
+            <h3>Account Information</h3>
+            
+            <div class="info-display">
+                <label>Role</label>
+                <p id="displayRole">-</p>
+            </div>
+            
+            <div class="info-display" id="workerTypeDisplay" style="display: none;">
+                <label>Worker Type</label>
+                <p id="displayWorkerType">-</p>
+            </div>
+            
+            <div class="info-display">
+                <label>Registration Date</label>
+                <p id="displayRegistrationDate">-</p>
+            </div>
+            
+            <div class="info-display">
+                <label>Account Status</label>
+                <p id="displayAccountStatus">-</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/profile.js"></script>
+</body>
+</html>

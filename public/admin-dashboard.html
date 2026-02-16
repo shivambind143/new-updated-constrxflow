@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - ConstruxFlow</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-brand">ConstruxFlow</div>
+        <div class="navbar-menu">
+            <span style="color: white;">Admin Panel</span>
+            <a href="/profile" class="btn btn-primary">My Profile</a>
+            <button onclick="logout()" class="btn btn-danger">Logout</button>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h1>Admin Dashboard</h1>
+        </div>
+
+        <!-- Statistics -->
+        <div id="statistics" style="margin-bottom: 2rem;"></div>
+
+        <!-- Tabs -->
+        <div style="margin-bottom: 2rem;">
+            <button class="btn btn-primary" onclick="showTab('users')">All Users</button>
+            <button class="btn btn-success" onclick="showTab('projects')">All Projects</button>
+            <button class="btn btn-warning" onclick="showTab('orders')">All Orders</button>
+        </div>
+
+        <!-- Users Tab -->
+        <div id="usersTab" class="tab-content">
+            <h2>All Users</h2>
+            <div class="table-container">
+                <table id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Projects Tab -->
+        <div id="projectsTab" class="tab-content" style="display: none;">
+            <h2>All Projects</h2>
+            <div id="projectsList"></div>
+        </div>
+
+        <!-- Orders Tab -->
+        <div id="ordersTab" class="tab-content" style="display: none;">
+            <h2>All Material Orders</h2>
+            <div id="ordersList"></div>
+        </div>
+    </div>
+
+    <script src="/js/admin-dashboard.js"></script>
+</body>
+</html>
