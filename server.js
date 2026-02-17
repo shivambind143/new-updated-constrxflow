@@ -10,7 +10,10 @@ const db = require('./config/database');
 const auth = require('./middleware/auth');
 
 const app = express();
-const PORT = 3000;
+// const PORT = 3000;
+// this will use for render delopy
+const PORT = process.env.PORT || 3000;
+
 
 // Create uploads directory if it doesn't exist
 const uploadsDir = path.join(__dirname, 'public', 'uploads', 'profiles');
